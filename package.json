@@ -1,0 +1,22 @@
+{
+  "name": "bg7tbl-rf-usb",
+  "version": "1.0.0",
+  "description": "138MHz-4.4GHz USB RF Source Signal Generator / Simple Spectrum Analyzer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drom/BG7TBL-RF-USB.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/drom/BG7TBL-RF-USB/issues"
+  },
+  "homepage": "https://github.com/drom/BG7TBL-RF-USB#readme",
+  "devDependencies": {
+    "serialport": "^6.0.4"
+  }
+}
