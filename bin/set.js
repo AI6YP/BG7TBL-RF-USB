@@ -27,7 +27,7 @@ port.on('open', () => {
   // f220000000 = 2.2e9
   // f340000000 = 1.7e9?
   port.write(
-    (c.start + 'f240000000'),
+    (c.start + 'f080000000'),
     err => { if (err) { console.log(err.message); } }
   )
 
