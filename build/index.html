@@ -4,18 +4,25 @@
     <meta charset="UTF-8" />
     <title>Spectrum Analyzer</title>
     <style>
-      #body { margin: 0; background: #444; }
+      body {
+        margin: auto;
+        margin-top: 10px;
+        width: 1001px;
+        background: #111;
+      }
     </style>
   </head>
   <body>
-    <button id="startBtn">Start</button>
+    <div id="root"></div>
+    <!-- <button id="startBtn">Start</button>
     <div>
       <svg width="2000" height="500" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="black" fill="none">
+        <g stroke="black" fill="none" transform="translate(.5,.5)">
+          <rect x="0" y="0" width="999" height="499"/>
           <path id="p1" d="M0 100 L 1 90"/>
         </g>
       </svg>
-    </div>
+    </div> -->
     <script src="app.js"></script>
   </body>
 </html>

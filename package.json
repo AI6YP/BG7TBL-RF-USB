@@ -22,7 +22,10 @@
     "express": "^4.16.2",
     "http-server": "^0.10.0",
     "portfinder": "^1.0.13",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
     "serialport": "^6.0.4",
     "ws": "^3.3.2"
-  }
+  },
+  "dependencies": {}
 }
