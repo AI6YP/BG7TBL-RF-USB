@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify src/app.js > build/app.js"
+    "build": "browserify src/app.js > public/app.js",
+    "start": "./bin/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/drom/BG7TBL-RF-USB.git"
   },
-  "author": "",
+  "author": "ai6yp@drom.io",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/drom/BG7TBL-RF-USB/issues"
@@ -20,7 +21,7 @@
   "devDependencies": {
     "browserify": "^14.5.0",
     "express": "^4.16.2",
-    "http-server": "^0.10.0",
+    "ip": "^1.1.5",
     "portfinder": "^1.0.13",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
