@@ -53,15 +53,24 @@ function genPlot ($) {
         );
     }
 
+    function numToFreq (f) {
+        if ((f % 100000000) === 0) {
+            return (f / 1000000000) + ' GHz';
+        }
+        if ((f % 100000) === 0) {
+            return (f / 1000000) + ' MHz';
+        }
+        if ((f % 100) === 0) {
+            return (f / 1000) + ' KHz';
+        }
+        return f + ' Hz';
+    }
+
     function Plot (props) {
         const w = props.width;
         const h = props.height;
-        const freq = Number(props.freq + '0');
-        const step = Number(props.step + '0');
-        const smpl = Number(props.smpl);
-        const span = step * smpl
-        const fmax = freq + span;
-        const center = (freq + fmax) / 2;
+        const center = numToFreq(props.center);
+        const span = numToFreq(props.span);
         return (
             $('div', {},
                 $('svg', svgHeader(props),
@@ -76,7 +85,7 @@ function genPlot ($) {
                         $(Line, props)
                     ),
                     $('g', {transform: 'translate(10, 490)', fill: '#fff'},
-                        $('text', {}, 'Center: ' + center + ' Span: ' + span)
+                        $('text', {fontFamily: 'sans-serif', fontSize: '20px'}, 'Center: ' + center + ' Span: ' + span)
                     )
                 )
             )

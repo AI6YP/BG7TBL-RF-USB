@@ -11,12 +11,15 @@ const c = {
   start: String.fromCharCode(0x8f),
   version: 'v',
   fset: 'f',
-  sweep: 'x',
-  freq: '299000000',
-  step:  '00005000',
-  smpl:      '0500'
+  sweep: 'x'
 };
 
+const center = 3e9;
+const span = 100e3;
+const samples = 500;
+const freq = ('000000000' + (((center - (span / 2)) / 10) |0).toString()).slice(-9);
+const step = ('00000000' + (((span / samples) / 10) |0).toString()).slice(-8);
+const smpl = ('0000' + (samples).toString()).slice(-4);
 // const startBtn = document.getElementById('startBtn');
 // const p1 = document.getElementById('p1');
 //
@@ -34,8 +37,8 @@ class App extends React.Component {
 
         sock.onopen = event => {
             this.setState(prevState => ({ curX: 0 }));
-            sock.send(c.start + c.sweep + c.freq + c.step + c.smpl);
-            console.log('start');
+            console.log('start' + freq + step + smpl);
+            sock.send(c.start + c.sweep + freq + step + smpl);
         };
 
         sock.onmessage = event => {
@@ -62,7 +65,7 @@ class App extends React.Component {
                     // console.log(curX);
                     if (curX === 1000) {
                         curX = 0;
-                        sock.send(c.start + c.sweep + c.freq + c.step + c.smpl);
+                        sock.send(c.start + c.sweep + freq + step + smpl);
                     }
                     return {
                         p1d: p1d,
@@ -84,9 +87,8 @@ ReactDOM.render(
     $(App, {
         width: 1000,
         height: 500,
-        freq: c.freq,
-        step: c.step,
-        smpl: c.smpl,
+        center: center,
+        span: span,
         p1d: '',
         curX: 0
     }),
