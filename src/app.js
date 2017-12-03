@@ -15,8 +15,8 @@ const c = {
 };
 
 const center = 3e9;
-const span = 100e3;
-const samples = 500;
+const span = 20e6;
+const samples = 512;
 const freq = ('000000000' + (((center - (span / 2)) / 10) |0).toString()).slice(-9);
 const step = ('00000000' + (((span / samples) / 10) |0).toString()).slice(-8);
 const smpl = ('0000' + (samples).toString()).slice(-4);
@@ -63,7 +63,7 @@ class App extends React.Component {
                     }
                     curX += iLen;
                     // console.log(curX);
-                    if (curX === 1000) {
+                    if (curX === (2 * samples)) {
                         curX = 0;
                         sock.send(c.start + c.sweep + freq + step + smpl);
                     }
