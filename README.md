@@ -2,7 +2,7 @@
 
 Spectrum Analyzer UI
 
-![screenshot](screenshot.gif)
+![screenshot](screenshot1.gif)
 
 138MHz-4.4GHz USB RF Source Signal Generator / Simple Spectrum Analyzer
 
