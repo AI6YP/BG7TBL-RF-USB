@@ -17,9 +17,6 @@ const c = {
 const center = 3e9;
 const span = 20e6;
 const samples = 512;
-const freq = ('000000000' + (((center - (span / 2)) / 10) |0).toString()).slice(-9);
-const step = ('00000000' + (((span / samples) / 10) |0).toString()).slice(-8);
-const smpl = ('0000' + (samples).toString()).slice(-4);
 // const startBtn = document.getElementById('startBtn');
 // const p1 = document.getElementById('p1');
 //
@@ -28,6 +25,21 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = props;
+        this.sweepCmd = this.sweepCmd.bind(this);
+    }
+
+    sweepCmd () {
+        const center = this.state.center;
+        const span = this.state.span;
+        const freq = ('000000000' + (((center - (span / 2)) / 10) |0).toString()).slice(-9);
+        const step = ('00000000' + (((span / samples) / 10) |0).toString()).slice(-8);
+        const smpl = ('0000' + (samples).toString()).slice(-4);
+        this.setState(prevState => ({
+            fmin: center - span / 2,
+            f0: center,
+            fmax: center + span / 2
+        }));
+        return c.start + c.sweep + freq + step + smpl;
     }
 
     componentDidMount () {
@@ -37,8 +49,7 @@ class App extends React.Component {
 
         sock.onopen = event => {
             this.setState(prevState => ({ curX: 0 }));
-            console.log('start' + freq + step + smpl);
-            sock.send(c.start + c.sweep + freq + step + smpl);
+            sock.send(this.sweepCmd());
         };
 
         sock.onmessage = event => {
@@ -65,7 +76,7 @@ class App extends React.Component {
                     // console.log(curX);
                     if (curX === (2 * samples)) {
                         curX = 0;
-                        sock.send(c.start + c.sweep + freq + step + smpl);
+                        sock.send(this.sweepCmd());
                     }
                     return {
                         p1d: p1d,
@@ -79,13 +90,46 @@ class App extends React.Component {
     }
 
     render () {
-        return $(Plot, this.state);
+        const that = this;
+        return $('div', {},
+            $(Plot, this.state),
+            $('div', {style: {color: '#fff', fontSize: '24px'}},
+                $('div', {},
+                    $('span', {className: 'blk', style: {width: '100px'}}, 'Center: '),
+                    $('input', {
+                        type: 'number',
+                        value: this.state.center,
+                        onChange: function (evnt) {
+                            const value = Number(evnt.target.value);
+                            that.setState(prevState => (
+                                {center: value}
+                            ));
+                        }
+                    }),
+                    ' Hz'
+                ),
+                $('div', {},
+                    $('span', {className: 'blk', style: {width: '100px'}}, 'Span: '),
+                    $('input', {
+                        type: 'number',
+                        value: this.state.span,
+                        onChange: function (evnt) {
+                            const value = Number(evnt.target.value);
+                            that.setState(prevState => (
+                                {span: value}
+                            ));
+                        }
+                    }),
+                    ' Hz'
+                )
+            )
+        );
     }
 }
 
 ReactDOM.render(
     $(App, {
-        width: 1000,
+        width: 1024,
         height: 500,
         center: center,
         span: span,
