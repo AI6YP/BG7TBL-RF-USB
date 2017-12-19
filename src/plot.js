@@ -96,8 +96,14 @@ function genPlot ($) {
     }
 
     function Line (props) {
+        const d = props.p1d.reduce((res, e, i) => {
+            if (i > 0) {
+                res += ' L';
+            }
+            return res += (i + ' ' + (499 - e));
+        }, 'M');
         return (
-            $('path', {d: props.p1d})
+            $('path', {d: d})
         );
     }
 

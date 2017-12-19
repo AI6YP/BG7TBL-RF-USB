@@ -64,13 +64,8 @@ class App extends React.Component {
                     let p1d = prevState.p1d;
                     let curX = prevState.curX;
 
-                    if (curX === 0) {
-                        p1d = 'M0 500';
-                    } else {
-                        p1d = prevState.p1d;
-                    }
                     for(let i = 0; i < iLen; i++) {
-                        p1d += ' L' + (i + curX) + ' ' + (499 - data16[i]);
+                        p1d[i + curX] = data16[i];
                     }
                     curX += iLen;
                     // console.log(curX);
@@ -133,7 +128,7 @@ ReactDOM.render(
         height: 500,
         center: center,
         span: span,
-        p1d: '',
+        p1d: [],
         curX: 0
     }),
     document.getElementById('root')
