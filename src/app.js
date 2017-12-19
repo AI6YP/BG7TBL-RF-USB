@@ -62,10 +62,18 @@ class App extends React.Component {
 
                 this.setState(prevState => {
                     let p1d = prevState.p1d;
+                    let p1dmax = prevState.p1dmax;
                     let curX = prevState.curX;
+                    let reset = prevState.reset;
+
+                    if (curX === 0 && prevState.reset) {
+                        p1dmax = [];
+                        reset = false;
+                    }
 
                     for(let i = 0; i < iLen; i++) {
                         p1d[i + curX] = data16[i];
+                        p1dmax[i + curX] = Math.max((p1dmax[i + curX] || 0), data16[i]);
                     }
                     curX += iLen;
                     // console.log(curX);
@@ -75,7 +83,9 @@ class App extends React.Component {
                     }
                     return {
                         p1d: p1d,
-                        curX: curX
+                        p1dmax: p1dmax,
+                        curX: curX,
+                        reset: reset
                     };
                 });
             // console.log(data16);
@@ -97,7 +107,7 @@ class App extends React.Component {
                         onChange: function (evnt) {
                             const value = Number(evnt.target.value);
                             that.setState(prevState => (
-                                {center: value}
+                                {center: value, reset: true}
                             ));
                         }
                     }),
@@ -111,7 +121,7 @@ class App extends React.Component {
                         onChange: function (evnt) {
                             const value = Number(evnt.target.value);
                             that.setState(prevState => (
-                                {span: value}
+                                {span: value, reset: true}
                             ));
                         }
                     }),
@@ -129,6 +139,8 @@ ReactDOM.render(
         center: center,
         span: span,
         p1d: [],
+        p1dmax: [],
+        reset: true,
         curX: 0
     }),
     document.getElementById('root')

@@ -96,14 +96,23 @@ function genPlot ($) {
     }
 
     function Line (props) {
-        const d = props.p1d.reduce((res, e, i) => {
+        const p1d = props.p1d.reduce((res, e, i) => {
+            if (i > 0) {
+                res += ' L';
+            }
+            return res += (i + ' ' + (499 - e));
+        }, 'M');
+        const p1dmax = props.p1dmax.reduce((res, e, i) => {
             if (i > 0) {
                 res += ' L';
             }
             return res += (i + ' ' + (499 - e));
         }, 'M');
         return (
-            $('path', {d: d})
+            $('g', {},
+                $('path', {className: 'p1dmax', d: p1dmax}),
+                $('path', {className: 'p1d', d: p1d})
+            )
         );
     }
 
@@ -119,15 +128,12 @@ function genPlot ($) {
                         $('style', {}, `
                             .l1 { stroke: black; fill: none; stroke-linecap: round; stroke-width: 3 }
                             .l2 { stroke: black; fill: none; stroke-linecap: round; }
+                            .p1d { stroke: #ff0; fill: none; }
+                            .p1dmax { stroke: #550; fill: none; }
                             .label { font-size: 16px; stroke: none; fill: #fff; }
                         `)
                     ),
-                    $('g',
-                        {
-                            transform: t(m.left + .5, m.top + .5),
-                            stroke: '#ff0',
-                            fill: 'none'
-                        },
+                    $('g', {transform: t(m.left + .5, m.top + .5)},
                         $(Grid, props),
                         $(Line, props)
                     )
