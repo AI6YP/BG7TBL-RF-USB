@@ -8,7 +8,7 @@ function t (x, y) {
     return 'translate(' + (x || '0') + (y ? (',' + y) : '') + ')';
 }
 
-const m = {left: 48, right: 48, top: 8, bottom: 32};
+const m = {left: 48, right: 7, top: 16, bottom: 32};
 
 function svgHeader (props) {
     const w = props.width + 1 + m.left + m.right;
