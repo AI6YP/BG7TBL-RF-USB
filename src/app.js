@@ -2,10 +2,10 @@
 
 const React = require('react');
 const ReactDOM = require('react-dom');
-const genPlot = require('./plot');
+const rePlot = require('./re-plot');
 
 const $ = React.createElement;
-const Plot = genPlot($);
+const Plot = rePlot($);
 
 const c = {
   start: String.fromCharCode(0x8f),
