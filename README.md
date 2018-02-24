@@ -24,3 +24,4 @@ sudo usermod -a -G dialout yourname
 ## References
 
   * https://sigrok.org/wiki/BG7TBL
+  * https://github.com/darkstar007/NetworkAnalyser
