@@ -1,15 +1,16 @@
 # BG7TBL-RF-USB
 
-Spectrum Analyzer UI
+Spectrum Analyzer UI in browser.
 
 ![screenshot](screenshot1.gif)
 
-138MHz-4.4GHz USB RF Source Signal Generator / Simple Spectrum Analyzer
+## Build
 
-![PCB](pcb.png)
+  * `npm i` - to install all JavaScript packages
+  * `npm run build` - to build client app
+  * `npm start` - to start server
 
-
-## setup
+## Linux configuration
 
 To see the groups: `groups`
 
@@ -20,6 +21,11 @@ Have to add user into `tty` and `dialout` groups
 sudo usermod -a -G tty yourname
 sudo usermod -a -G dialout yourname
 ```
+## Board
+
+138MHz-4.4GHz USB RF Source Signal Generator / Simple Spectrum Analyzer
+
+![PCB](pcb.png)
 
 ## References
 
