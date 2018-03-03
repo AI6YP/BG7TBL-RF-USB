@@ -1,6 +1,8 @@
 # BG7TBL-RF-USB
 
-Spectrum Analyzer UI in browser.
+Spectrum Analyzer software using inexpensive (138MHz-4.4GHz) or (25MHz-6GHz) BG7TBL box.
+
+NodeJS Server + Web Client.
 
 ![screenshot](screenshot1.gif)
 
