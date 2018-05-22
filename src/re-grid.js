@@ -52,19 +52,19 @@ module.exports = function ($) {
                     y: h + 20,
                     className: 'label',
                     textAnchor: 'start'
-                }, numToFreq(props.fmin)),
+                }, numToFreq(props.center - props.span / 2)),
                 $('text', {
                     x: w / 2,
                     y: h + 20,
                     className: 'label',
                     textAnchor: 'middle'
-                }, numToFreq(props.f0)),
+                }, numToFreq(props.center)),
                 $('text', {
                     x: w - 4,
                     y: h + 20,
                     className: 'label',
                     textAnchor: 'end'
-                }, numToFreq(props.fmax))
+                }, numToFreq(props.center + props.span / 2))
             )
         );
     }
