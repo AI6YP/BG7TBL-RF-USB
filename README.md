@@ -6,22 +6,32 @@ NodeJS Server + Web Client.
 
 ![screenshot](screenshot1.gif)
 
-## Build
-
-  * `npm i` - to install all JavaScript packages
-  * `npm run build` - to build client app
-  * `npm start` - to start server
-
 ## Linux configuration
 
-To see the groups: `groups`
+```sh
+# To see the groups: `groups`
+# Have to add user into `tty` and `dialout` groups
 
-To see all available groups types: `compgen -g`
+# to see <yourname>
+echo "$USER"
 
-Have to add user into `tty` and `dialout` groups
-```
-sudo usermod -a -G tty yourname
-sudo usermod -a -G dialout yourname
+# setup groups
+sudo usermod -a -G tty,dialout <yourname>
+
+# install Node Version Manager (nvm)
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+
+# install new Node.js
+nvm i 10
+
+# install package dependencies
+npm i
+
+# build clien App
+npm run build
+
+# start server
+npm start
 ```
 ## Board
 
