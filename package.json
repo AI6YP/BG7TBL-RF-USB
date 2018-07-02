@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/drom/BG7TBL-RF-USB#readme",
   "devDependencies": {
+    "@drom/eslint-config": "^0.7.0",
     "browserify": "^14.5.0",
+    "eslint": "^5.0.1",
     "express": "^4.16.2",
     "fs-extra": "^6.0.1",
     "ip": "^1.1.5",
@@ -30,7 +32,15 @@
     "ws": "^3.3.2"
   },
   "dependencies": {
+    "lodash.debounce": "^4.0.8",
+    "lodash.range": "^3.2.0",
     "smith-chart": "^0.1.1",
     "tspan": "^0.2.1"
+  },
+  "eslintConfig": {
+    "extends": "@drom/eslint-config/eslint4/node4",
+    "rules": {
+      "no-console": 1
+    }
   }
 }
