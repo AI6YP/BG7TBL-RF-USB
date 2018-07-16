@@ -1,9 +1,12 @@
 'use strict';
 
 module.exports = {
-    left: 48,
-    right: 16,
-    top: 16,
-    bottom: 40,
-    steps: {x: 8, y: 10}
+    left: 1,
+    right: 1,
+    top: 1,
+    bottom: 32,
+    steps: {
+        x: 10,
+        y: 10
+    }
 };

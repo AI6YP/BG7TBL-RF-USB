@@ -11,8 +11,8 @@ const m = require('./margin');
 
 module.exports = function ($) {
     return function Labels (props) {
-        const xStep = ((props.width - m.left - m.right) / m.steps.x) |0;
-        const yStep = ((props.height - m.top - m.bottom) / m.steps.y) |0;
+        const xStep = (props.width / m.steps.x) |0;
+        const yStep = (props.height / m.steps.y) |0;
         return (
             $('g', t(m.left, m.top),
                 $('rect', {
@@ -21,20 +21,28 @@ module.exports = function ($) {
                     height: yStep * m.steps.y,
                     className: 'g1'
                 }),
-                range(m.steps.y + 1).map(i => $('text', {
+                range(1, m.steps.y).map(i => $('text', {
                     key: i,
-                    x: -5,
+                    x: 5,
+                    y: i * yStep + 5,
+                    textAnchor: 'start',
+                    className: 'label'
+                }, -i * 10)),
+                range(1, m.steps.y).map(i => $('text', {
+                    key: i,
+                    x: xStep * m.steps.x -5,
                     y: i * yStep + 5,
                     textAnchor: 'end',
                     className: 'label'
-                }, -i * m.steps.y)),
+                }, -i * 10)),
                 range(1, m.steps.x).map(i => $('text', {
                     key: i,
                     x: i * xStep,
                     y: m.steps.y * yStep + 18,
                     textAnchor: 'middle',
                     className: 'label'
-                }, numToFreq(props.center - (props.span / 10 * (i - 5)))))
+                // }, numToFreq(props.center - (props.span / 10 * (i - 5)))))
+                }, numToFreq((props.fmax - props.fmin) / m.steps.x * i + props.fmin)))
             )
         );
     };

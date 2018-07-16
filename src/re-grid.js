@@ -10,8 +10,8 @@ const m = require('./margin');
 
 module.exports = function ($) {
     return function Grid (props) {
-        const xStep = ((props.width - m.left - m.right) / m.steps.x) |0;
-        const yStep = ((props.height - m.top - m.bottom) / m.steps.y) |0;
+        const xStep = (props.width / m.steps.x) |0;
+        const yStep = (props.height / m.steps.y) |0;
         return (
             $('g', t(m.left, m.top),
                 range(1, m.steps.y).map(i => {

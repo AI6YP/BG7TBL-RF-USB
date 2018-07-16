@@ -4,11 +4,12 @@
 const reGrid = require('./re-grid');
 const reLine = require('./re-line');
 const reLabels = require('./re-labels');
+const m = require('./margin');
 const t = require('./t');
 
 function svgHeader (props) {
-    const w = props.width - 1;
-    const h = props.height - 1;
+    const w = props.width + m.left + m.right - 1;
+    const h = props.height + m.top + m.bottom - 1;
     return {
         xmlns: 'http://www.w3.org/2000/svg',
         xmlnsXlink: 'http://www.w3.org/1999/xlink',
@@ -35,14 +36,14 @@ function genPlot ($) {
                     .l2 { stroke: black; fill: none; stroke-linecap: round; }
                     .g1 { stroke: hsl(130, 5%, 80%); fill: none; }
                     .g2 { stroke: hsl(130, 5%, 30%); fill: none; }
-                    .p1d { stroke: #ff0; fill: none; }
-                    .p1dmax { stroke: #550; fill: none; }
+                    .p1d { stroke: hsl(60, 100%, 75%); fill: none; stroke-linejoin: round; }
+                    .p1dmax { stroke: hsl(60, 100%, 25%); fill: none; stroke-linejoin: round; }
                     .label { font-size: 16px; stroke: none; fill: #fff; }
                 `)
             ),
             $('g', t(.5, .5),
                 $(Grid, props),
-                // $(Line, props)
+                $(Line, props),
                 $(Labels, props)
             )
         );
