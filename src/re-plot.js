@@ -25,12 +25,15 @@ function svgHeader (props) {
 
 function reMarker ($) {
     return function Marker (props) {
-        const index = (((props.mx - m.left) / props.width) * props.samples) << 1;
+        const x = (props.mx - m.left) / props.width;
+        const index = Math.round(x * props.samples * 2);
         const ys = ((props.height / m.steps.y) |0) / 50;
         const y = props.tail ? readInt16LEy(props.tail.data, index, ys) : 100;
+        const label = Math.round(x * (props.fmax - props.fmin) + props.fmin);
         // console.log(props.tail);
         return $('g', t(props.mx, y + m.top),
-            $('path', {className: 'marker', d: 'm 0,0 4,-8 h 12 v -16 h -32 v 16 h 12 z'})
+            $('path', {className: 'marker', d: 'm 0,0 4,-8 h 44 v -16 h -96 v 16 h 44 z'}),
+            $('text', {className: 'marker-label', y: -10}, label)
         );
     };
 }
@@ -56,7 +59,8 @@ function genPlot ($) {
                     .p1d { stroke: hsl(60, 100%, 75%); fill: none; stroke-linejoin: round; }
                     .p1dmax { stroke: hsl(60, 100%, 25%); fill: none; stroke-linejoin: round; }
                     .label { font-size: 16px; stroke: none; fill: #fff; }
-                    .marker { stroke: none; fill: hsl(104, 100%, 49%); }
+                    .marker { stroke: hsl(104, 100%, 49%); fill: none; }
+                    .marker-label { fill: hsl(104, 100%, 49%); text-anchor: middle; }
                 `)
             ),
             $('g', t(.5, .5),
