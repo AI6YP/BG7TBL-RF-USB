@@ -5,6 +5,7 @@ const ReactDOM = require('react-dom');
 const update = require('immutability-helper');
 const rePlot = require('./re-plot');
 const debounce = require('lodash.debounce');
+const t = require('./t');
 
 const m = require('./margin');
 
@@ -50,9 +51,18 @@ class App extends React.Component {
         }));
     }
 
+    updateCursor (event) {
+        const mx = event.pageX;
+        console.log(mx);
+        this.setState(() => ({
+            mx: mx
+        }));
+    }
+
     componentDidMount () {
         this.updateDimentions();
         window.addEventListener('resize', debounce(this.updateDimentions.bind(this), 500));
+        document.addEventListener('mousemove', debounce(this.updateCursor.bind(this), 100));
 
         sock.onopen = () => {
             // console.log('open');
@@ -229,7 +239,8 @@ ReactDOM.render(
         fmin: 400e6,
         fmax: 500e6,
         p1d: [],
-        p1dmax: []
+        p1dmax: [],
+        mx: 0
     }),
     document.getElementById('root')
 );
