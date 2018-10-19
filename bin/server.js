@@ -63,10 +63,10 @@ const appendData = state => {
     const wss = new WebSocket.Server({server});
     const see = new events.EventEmitter();
 
-    const samples = 512;
+    const samples = 256;
     const state = {
-        fmin: 200e6,
-        fmax: 44e8,
+        fmin: 815e6,
+        fmax: 1015e6,
         samples: samples,
         sweep: true,
         filename: Date.now() + '.csv',
@@ -77,10 +77,10 @@ const appendData = state => {
         max: Buffer.alloc(4 * samples)
     };
 
-    for(let i = 0; i < state.tail.length; i += 2) {
-        state.tail.writeUInt16LE(40, i);
-        state.max.writeUInt16LE(40, i);
-    }
+    // for(let i = 0; i < state.tail.length; i += 2) {
+    //     state.tail.writeUInt16LE(0, i);
+    //     state.max.writeUInt16LE(0, i);
+    // }
 
     see.on('cmd', message => {
         message = JSON.parse(message);

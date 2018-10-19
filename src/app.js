@@ -236,8 +236,8 @@ ReactDOM.render(
     $(App, {
         width: 1024,
         height: 500,
-        fmin: 400e6,
-        fmax: 500e6,
+        fmin: 800e6,
+        fmax: 1000e6,
         p1d: [],
         p1dmax: [],
         mx: 0
