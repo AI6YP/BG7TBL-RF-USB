@@ -18,6 +18,9 @@ echo "$USER"
 # setup groups
 sudo usermod -a -G tty,dialout <yourname>
 
+# to attach Serial driver
+sudo modprobe ftdi_sio
+
 # install Node Version Manager (nvm)
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 
