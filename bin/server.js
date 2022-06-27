@@ -3,7 +3,7 @@
 'use strict';
 
 const events = require('events');
-const SerialPort = require('serialport');
+const { SerialPort } = require('serialport');
 const express = require('express');
 const http = require('http');
 const url = require('url');
@@ -56,7 +56,7 @@ const appendData = state => {
 };
 
 (() => {
-    const sport = new SerialPort(devTTY, {baudRate: 57600});
+    const sport = new SerialPort({path: devTTY, baudRate: 57600});
     const app = express();
     app.use(express.static('public'));
     const server = http.createServer(app);
@@ -65,8 +65,8 @@ const appendData = state => {
 
     const samples = 256;
     const state = {
-        fmin: 815e6,
-        fmax: 1015e6,
+        fmin: 5.7e9,
+        fmax: 5.8e9,
         samples: samples,
         sweep: true,
         filename: Date.now() + '.csv',

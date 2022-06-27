@@ -1,27 +1,20 @@
 #!/usr/bin/env node
 
-const SerialPort = require('serialport');
+const { SerialPort } = require('serialport');
 
 const c = {
   start: String.fromCharCode(0x8f),
   version: 'v',
   fset: 'f',
   sweep: 'x',
-  freq: '240000000',
-  step: '00000100',
-  smpl: '1000'
+  freq: '200000000', step: '00010000', smpl: '2000' // 2--2.2 GHz
 };
 
-var port = new SerialPort('/dev/ttyUSB0', {
-  baudRate: 57600
-});
+const port = new SerialPort({path: '/dev/ttyUSB0', baudRate: 57600});
 
-port.on('error', err => console.log(err));
+let timer0;
 
-port.on('data', data => console.log(data));
-
-port.on('open', () => {
-
+const start = () => {
   port.write(
     (c.start + c.sweep + c.freq + c.step + c.smpl),
     err => {
@@ -31,5 +24,17 @@ port.on('open', () => {
       console.log('sweep');
     }
   )
+}
 
+port.on('error', err => console.log(err));
+
+port.on('data', data => {
+  clearTimeout(timer0);
+  timer0 = setTimeout(start, 1000);
+  process.stdout.write('.');
+  // console.log(data);
 });
+
+
+
+port.on('open', start);
